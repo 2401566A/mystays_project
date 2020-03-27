@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 class Stay(models.Model):
     name = models.CharField(max_length=128, unique=True)
@@ -9,6 +10,12 @@ class Stay(models.Model):
     description = models.CharField(max_length=255)
     address = models.CharField(max_length=100, default='')
     contacts = models.CharField(max_length=100)
+
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Stay, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name

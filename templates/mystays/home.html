@@ -8,9 +8,23 @@
     <body>
         <h1>Test Home Page</h1>
         <div>
-            <a href="/mystays/about_us/">About Us</a><br />
-            <a href="/mystays/where_to_stay/">Where To Stay</a><br />
+            <a href="/mystays/AboutUs/">About Us</a><br />
+            <a href="/mystays/WhereToStay/">Where To Stay</a><br />
         </div>
+
+        <div>
+        <h2>Check out our highest rated stays...</h2>
+        {% if best_stays %}
+            <ul>
+            {% for stay in best_stays %}
+                <li><a href="/mystays/ChosenStay/{{ stay.slug }}/">{{ stay.name }}</a>: {{ stay.propertyRating }}/10</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There is nowhere to stay.</strong>
+        {% endif %}
+        </div>
+
     </body>
 
 </html>

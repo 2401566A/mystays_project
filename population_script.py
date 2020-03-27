@@ -29,6 +29,10 @@ def populate():
          'comment': 'A bit expensive for the services provided. Overall nice though.'},
         {'title': 'Cat', 'impression': 8, 'locationRating': 8, 'cleanliness': 8, 'descripAccuracy': 7, 'costRating': 8,
          'comment': 'There is a really cute stray cat who walks around.'} ]
+
+    northern_country_inn_reviews = [
+        {'title': 'A Nice Place to Stay', 'impression': 6, 'locationRating': 7, 'cleanliness': 8, 'descripAccuracy': 6, 'costRating': 6,
+         'comment': 'A nice inn, but you can tell it needs maintenance. I enjoyed the country location and even saw a few animals in the trees.'} ]
     
     stays = {'Sanctum Resort': {'reviews': sanctum_resort_reviews, 'price': 128,
                                 'description': 'A 4-star hotel within walking distance of Glasgow Central. Breakfast and free WiFi included. Nationally ranked steakhouse located on the ground floor.',
@@ -38,11 +42,14 @@ def populate():
                                'contacts': '+44 7282 126270, sunrisehostel@gmail.com'},
             'Riverside Inn': {'reviews': riverside_inn_reviews, 'price': 65,
                               'description': 'Picturesque inn with a riverside view and large garden. Rental cars available to drive to the nearest cities of Glasgow and Stirling.',
-                              'contacts': '+44 7958 156456, riversideinn@gmail.com'} }
+                              'contacts': '+44 7958 156456, riversideinn@gmail.com'},
+            'Northern Country Inn': {'reviews': northern_country_inn_reviews, 'price': 59,
+                              'description': 'Beautiful inn surrounded by forest and country views. Features classically decorated rooms with a fireplace and a room service menu.',
+                              'contacts': '+44 7900 756816, northerncountryinn@gmail.com'} }
 
     
     for sta, stay_data in stays.items():
-        s = add_stay(sta, stay_data['price'], stay_data['description'], stay_data['contacts'])
+        s = add_stay(sta, stay_data['price'], stay_data['description'], stay_data['contacts'], stay_data['reviews'])
         for r in stay_data['reviews']:
             add_review(s, r['title'], r['impression'], r['locationRating'], r['cleanliness'], r['descripAccuracy'], r['costRating'], r['comment'])
 
@@ -62,11 +69,21 @@ def add_review(stay, title, impression, locationRating, cleanliness, descripAccu
     return r
 
 
-def add_stay(name, price, description, contacts):
+def add_stay(name, price, description, contacts, reviews):
     s = Stay.objects.get_or_create(name=name)[0]
     s.price=price
     s.description=description
     s.contacts=contacts
+
+    total = 0
+    count = 0
+    for r in reviews:
+       total = total + r['impression']
+       count = count + 1
+
+    average = total/count
+    s.propertyRating=average
+    
     s.save()
     return s
 

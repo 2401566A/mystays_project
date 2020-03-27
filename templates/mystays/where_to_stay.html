@@ -7,6 +7,19 @@
 
     <body>
         <h1>Test Where To Stay Page</h1>
+
+        <div>
+            {% if stays %}
+                {% for stay in stays %}
+                <h3>{{ stay.name }}</h3> 
+                Rating: {{ stay.propertyRating }}<br />
+                {{ stay.description }}<br />
+                <a href="/mystays/WhereToStay/ChosenStay/{{ stay.slug }}/">View</a><br />
+                {% endfor %}
+            {% else %}
+            There is nowhere to stay.
+            {% endif %}
+        </div>
     </body>
 
 </html>
