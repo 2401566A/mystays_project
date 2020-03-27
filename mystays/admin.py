@@ -1,3 +1,5 @@
 from django.contrib import admin
+from mystays.models import Stay, Review
 
-# Register your models here.
+admin.site.register(Stay)
+admin.site.register(Review)
