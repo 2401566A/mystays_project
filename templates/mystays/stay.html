@@ -7,7 +7,7 @@
 
     <body>
         <div>
-        {% if stay %}
+            {% if stay %}
             <h1>{{ stay.name }}</h1>
 
             <div>
@@ -30,17 +30,19 @@
                 Location: {{ review.locationRating }}/10<br />
                 Cleanliness: {{ review.cleanliness }}/10<br />
                 Accuracy of Description: {{ review.descripAccuracy }}/10<br />
-                Cost: {{ review.costRating }}/10<br />
+                Cost Value: {{ review.costRating }}/10<br />
                 <br />
                 {% endfor %}
                 {% else %}
                 <strong>This stay currently has no reviews.</strong>
                 {% endif %}
             </div>
-        {% else %}
+            {% else %}
             The specified stay does not exist.
-        {% endif %}
+            {% endif %}
         </div>
+
+        <a href="/mystays/WhereToStay/ChosenStay/{{ stay.slug }}/RateAndReview">Leave Review</a><br />
     </body>
 
 </html>

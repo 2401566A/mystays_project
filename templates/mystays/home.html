@@ -6,10 +6,11 @@
     </head>
 
     <body>
-        <h1>Test Home Page</h1>
+        <h1>MyStays</h1>
         <div>
             <a href="/mystays/AboutUs/">About Us</a><br />
             <a href="/mystays/WhereToStay/">Where To Stay</a><br />
+            <a href="/mystays/PostStay/">Post A Stay</a><br />
         </div>
 
         <div>
@@ -17,7 +18,7 @@
         {% if best_stays %}
             <ul>
             {% for stay in best_stays %}
-                <li><a href="/mystays/ChosenStay/{{ stay.slug }}/">{{ stay.name }}</a>: {{ stay.propertyRating }}/10</li>
+                <li><a href="/mystays/WhereToStay/ChosenStay/{{ stay.slug }}/">{{ stay.name }}</a>: {{ stay.propertyRating }}/10</li>
             {% endfor %}
             </ul>
         {% else %}

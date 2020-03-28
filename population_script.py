@@ -33,6 +33,11 @@ def populate():
     northern_country_inn_reviews = [
         {'title': 'A Nice Place to Stay', 'impression': 6, 'locationRating': 7, 'cleanliness': 8, 'descripAccuracy': 6, 'costRating': 6,
          'comment': 'A nice inn, but you can tell it needs maintenance. I enjoyed the country location and even saw a few animals in the trees.'} ]
+
+    purple_rose_hotel_reviews = [
+        {'title': 'Not great', 'impression': 3, 'locationRating': 6, 'cleanliness': 4, 'descripAccuracy': 4, 'costRating': 2,
+         'comment': 'They should not even call this place a hotel. Absolutely too expensive for the value because it has rude employees and bad room service. Do not stay here.'} ]
+        
     
     stays = {'Sanctum Resort': {'reviews': sanctum_resort_reviews, 'price': 128,
                                 'description': 'A 4-star hotel within walking distance of Glasgow Central. Breakfast and free WiFi included. Nationally ranked steakhouse located on the ground floor.',
@@ -45,7 +50,10 @@ def populate():
                               'contacts': '+44 7958 156456, riversideinn@gmail.com'},
             'Northern Country Inn': {'reviews': northern_country_inn_reviews, 'price': 59,
                               'description': 'Beautiful inn surrounded by forest and country views. Features classically decorated rooms with a fireplace and a room service menu.',
-                              'contacts': '+44 7900 756816, northerncountryinn@gmail.com'} }
+                              'contacts': '+44 7900 756816, northerncountryinn@gmail.com'},
+            'Purple Rose Hotel': {'reviews': purple_rose_hotel_reviews, 'price': 155,
+                                     'description': 'Luxurious and hospitable hotel with gourmet room service and restaurant. Spacious and tastefully decorated rooms with daily cleaning service and friendly staff. The whole family will love their stay here!',
+                                     'contacts': '+44 7903 752345, purplerosehotel@gmail.com'} }
 
     
     for sta, stay_data in stays.items():
@@ -75,15 +83,6 @@ def add_stay(name, price, description, contacts, reviews):
     s.description=description
     s.contacts=contacts
 
-    total = 0
-    count = 0
-    for r in reviews:
-       total = total + r['impression']
-       count = count + 1
-
-    average = total/count
-    s.propertyRating=average
-    
     s.save()
     return s
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Rate And Review</title>
+    </head>
+
+    <body>
+        <h1>{{ stay.name }}</h1>
+
+        <div>
+            {{ stay.description }}<br />
+        </div>
+
+        <div>
+            <h2>Leave Review</h2>
+            <form id="review_form" method="post" action="/mystays/WhereToStay/ChosenStay/{{ stay.slug }}/RateAndReview/">
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                {% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.help_text }}
+                    {{ field }}
+                    <br /> 
+                {% endfor %}
+                <input type="submit" name="submit" value="Rate and Review" />
+            </form>
+        </div>
+    </body>
+</html>

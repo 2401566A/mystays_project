@@ -29,7 +29,7 @@ class Review(models.Model):
     descripAccuracy = models.IntegerField(default=0)
     costRating = models.IntegerField(default=0)
     comment = models.CharField(max_length=255)
-    madeBy = models.CharField(max_length=30)
+#    madeBy = models.CharField(max_length=30)
 
     def __str__(self):
         return self.title
