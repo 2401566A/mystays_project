@@ -1,31 +1,27 @@
-<!DOCTYPE html>
-<html>
+{% extends 'mystays/base.html' %}
 
-    <head>
-        <title>MyStays</title>
-    </head>
+{% block title_block %}
+    Home
+{% endblock %}
 
-    <body>
-        <h1>MyStays</h1>
-        <div>
-            <a href="/mystays/AboutUs/">About Us</a><br />
-            <a href="/mystays/WhereToStay/">Where To Stay</a><br />
-            <a href="/mystays/PostStay/">Post A Stay</a><br />
-        </div>
+{% block body_block %}
+    <h1>MyStays</h1>
+    <div>
+        <a href="{% url 'mystays:about_us' %}">About Us</a><br />
+        <a href="{% url 'mystays:where_to_stay' %}">Where To Stay</a><br />
+        <a href="{% url 'mystays:post_stay' %}">Post A Stay</a><br />
+    </div>
 
-        <div>
+    <div>
         <h2>Check out our highest rated stays...</h2>
         {% if best_stays %}
-            <ul>
+        <ul>
             {% for stay in best_stays %}
-                <li><a href="/mystays/WhereToStay/ChosenStay/{{ stay.slug }}/">{{ stay.name }}</a>: {{ stay.propertyRating }}/10</li>
+            <li><a href="{% url 'mystays:show_stay' stay.slug %}">{{ stay.name }}</a>: {{ stay.propertyRating }}/10</li>
             {% endfor %}
-            </ul>
+        </ul>
         {% else %}
-            <strong>There is nowhere to stay.</strong>
+        <strong>There is nowhere to stay.</strong>
         {% endif %}
-        </div>
-
-    </body>
-
-</html>
+    </div>
+{% endblock %}

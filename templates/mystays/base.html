@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+    <head>   
+        <title>
+            {% block title_block %}
+                MyStays
+            {% endblock %}
+        </title>
+    </head>
+    <body>
+        <div>
+        {% block body_block %}
+        {% endblock %}
+        </div>
+
+        <hr />
+        <div>
+            <ul>
+                <li><a href="{% url 'mystays:home' %}">Home</a></li>
+                <li><a href="{% url 'mystays:about_us' %}">About Us</a></li>
+                <li>Sign Up</li>
+                <li>Log in</li>
+            </ul>
+        </div>
+    </body>
+</html>
