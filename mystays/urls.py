@@ -9,5 +9,7 @@ urlpatterns = [
     path('WhereToStay/', views.where_to_stay, name='where_to_stay'),
     path('WhereToStay/ChosenStay/<slug:stay_name_slug>/', views.show_stay, name='show_stay'),
     path('PostStay/', views.post_stay, name='post_stay'),
-    path('WhereToStay/ChosenStay/<slug:stay_name_slug>/RateAndReview/', views.rate_and_review, name='rate_and_review')
+    path('WhereToStay/ChosenStay/<slug:stay_name_slug>/RateAndReview/', views.rate_and_review, name='rate_and_review'),
+    path('SignUp/', views.sign_up, name='sign_up'),
+    path('Login/', views.user_login, name='user_login'),
 ]

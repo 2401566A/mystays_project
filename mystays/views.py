@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from mystays.models import Stay, Review
-from mystays.forms import StayForm, ReviewForm
+from mystays.forms import StayForm, ReviewForm, UserForm, UserProfileForm
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.contrib.auth import authenticate, login
 
 def home(request):
     context_dict = {}
@@ -103,6 +104,63 @@ def rate_and_review(request, stay_name_slug):
     response = render(request, 'mystays/rate_and_review.html', context=context_dict)
     return response
 
+
+def sign_up(request):
+    registered = False
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+
+            user.set_password(user.password)
+            user.save()
+
+            #doesn't save until the connection between the user and user profile is created
+            profile = profile_form.save(commit=False)
+            profile.user = user
+
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+
+            profile.save()
+
+            registered = True
+        else:
+            print(user_form.errors, profile_form.errors)
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+
+    return render(request, 'mystays/sign_up.html', context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})        
+
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        #checks if the username and password provided match an account
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                #login the user
+                login(request, user)
+                return redirect(reverse('mystays:home'))
+            else:
+                return HttpResponse("Your MyStays account is disabled.")
+        else:
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
+    #the form is accessed via GET, display the login form
+    else:
+        return render(request, 'mystays/login.html')
+    
+
+#helper function to recalculate the overall rating of a stay
 def calcPropertyRating(stay, reviews):
     total = 0
     count = 0
@@ -114,6 +172,7 @@ def calcPropertyRating(stay, reviews):
     average = total/count
     stay.propertyRating = average
     stay.save()
+
 
 
 

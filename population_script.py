@@ -37,6 +37,12 @@ def populate():
     purple_rose_hotel_reviews = [
         {'title': 'Not great', 'impression': 3, 'locationRating': 6, 'cleanliness': 4, 'descripAccuracy': 4, 'costRating': 2,
          'comment': 'They should not even call this place a hotel. Absolutely too expensive for the value because it has rude employees and bad room service. Do not stay here.'} ]
+
+    horizons_hotel_reviews = [
+        {'title': 'Average', 'impression': 6, 'locationRating': 6, 'cleanliness': 6, 'descripAccuracy': 6, 'costRating': 8,
+         'comment': 'Overall a decent hotel. If what you are looking for is an average room to sleep in and mostly friendly staff, stay here. I would stay here again if the time came.'},
+        {'title': 'Gary is SO GREAT', 'impression': 9, 'locationRating': 8, 'cleanliness': 9, 'descripAccuracy': 8, 'costRating': 8,
+         'comment': 'I had a really nice stay here for about three days. I loved the room decor and the concierge Gary is so nice and helpful.'} ]        
         
     
     stays = {'Sanctum Resort': {'reviews': sanctum_resort_reviews, 'price': 128,
@@ -53,7 +59,10 @@ def populate():
                               'contacts': '+44 7900 756816, northerncountryinn@gmail.com'},
             'Purple Rose Hotel': {'reviews': purple_rose_hotel_reviews, 'price': 155,
                                      'description': 'Luxurious and hospitable hotel with gourmet room service and restaurant. Spacious and tastefully decorated rooms with daily cleaning service and friendly staff. The whole family will love their stay here!',
-                                     'contacts': '+44 7903 752345, purplerosehotel@gmail.com'} }
+                                     'contacts': '+44 7903 752345, purplerosehotel@gmail.com'},
+            'Horizons Hotel': {'reviews': horizons_hotel_reviews, 'price': 74,
+                                    'description': 'Reasonably priced hotel with beautifully decorated rooms and attentive staff. Rated a top hotel in Glasgow for five years running. Come stay with us!',
+                                    'contacts': '+44 7933 272747, horizonshotel@gmail.com'} }
 
     
     for sta, stay_data in stays.items():

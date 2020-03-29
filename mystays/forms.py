@@ -1,5 +1,5 @@
 from django import forms
-from mystays.models import Stay, Review
+from mystays.models import Stay, Review, UserProfile, User
 
 #form to upload a stay to the database
 class StayForm(forms.ModelForm):
@@ -16,6 +16,7 @@ class StayForm(forms.ModelForm):
         model = Stay
         fields = ('name',)
 
+
 #form to leave a review for a stay
 class ReviewForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Review title:")
@@ -30,3 +31,18 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         exclude = ('stay',)
+
+#form to fill in the username, email, and password of a new user
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password',)
+
+
+#form to fill in the profile picture of a new user
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('picture',)
