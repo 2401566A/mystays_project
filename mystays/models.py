@@ -2,6 +2,15 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    picture = models.ImageField(upload_to='profile_images', blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+
 class Stay(models.Model):
     name = models.CharField(max_length=128, unique=True)
 #    stayID = models.CharField(max_length=30, unique=True)
@@ -11,6 +20,8 @@ class Stay(models.Model):
     description = models.CharField(max_length=255)
     address = models.CharField(max_length=100, default='')
     contacts = models.CharField(max_length=100)
+
+    postedBy = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
     slug = models.SlugField(unique=True)
 
@@ -30,15 +41,8 @@ class Review(models.Model):
     descripAccuracy = models.IntegerField(default=0)
     costRating = models.IntegerField(default=0)
     comment = models.CharField(max_length=255)
-#    madeBy = models.CharField(max_length=30)
+
+    reviewedBy = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-
-    def __str__(self):
-        return self.user.username

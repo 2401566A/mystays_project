@@ -3,9 +3,18 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mystays_project.settings')
 
 import django
 django.setup()
-from mystays.models import Stay, Review
+from mystays.models import Stay, Review, UserProfile
+from django.contrib.auth.models import User
+
+userObjects = []
 
 def populate():
+    user1 = {'username': 'username1', 'password': 'password1', 'email': 'user1email@gmail.com'}
+
+    user2 = {'username': 'username2', 'password': 'password2', 'email': 'user2email@gmail.com'}
+
+    users = [user1, user2]
+    
     sanctum_resort_reviews = [
         {'title': 'Great hotel!', 'impression': 8, 'locationRating': 6, 'cleanliness': 10, 'descripAccuracy': 9, 'costRating': 7,
          'comment': 'Really enjoyed our stay, but it was a hassle to get to the city center. Would recommend.'},
@@ -64,6 +73,9 @@ def populate():
                                     'description': 'Reasonably priced hotel with beautifully decorated rooms and attentive staff. Rated a top hotel in Glasgow for five years running. Come stay with us!',
                                     'contacts': '+44 7933 272747, horizonshotel@gmail.com'} }
 
+    for user in users:
+        u = add_user(user['username'], user['password'], user['email'])
+        print(f'- {u}')
     
     for sta, stay_data in stays.items():
         s = add_stay(sta, stay_data['price'], stay_data['description'], stay_data['contacts'], stay_data['reviews'])
@@ -74,26 +86,41 @@ def populate():
         for r in Review.objects.filter(stay=s):
             print(f'- {s}: {r}')
 
+    User.objects.create_superuser('mystays', '2517529M@student.gla.ac.uk', 'mystaysproject123')
+
 def add_review(stay, title, impression, locationRating, cleanliness, descripAccuracy, costRating, comment):
-    r = Review.objects.get_or_create(stay=stay, title=title)[0]
+    r = Review.objects.get_or_create(stay=stay, title=title, reviewedBy=userObjects[0])[0]
     r.impression=impression
     r.locationRating=locationRating
     r.cleanliness=cleanliness
     r.descripAccuracy=descripAccuracy
     r.costRating=costRating
     r.comment=comment
+    
     r.save()
     return r
 
 
 def add_stay(name, price, description, contacts, reviews):
-    s = Stay.objects.get_or_create(name=name)[0]
+    s = Stay.objects.get_or_create(name=name, postedBy=userObjects[1])[0]
     s.price=price
     s.description=description
     s.contacts=contacts
 
     s.save()
     return s
+
+def add_user(username, password, email):
+    u = User.objects.get_or_create(username=username)[0]
+    u.password=password
+    u.email=email
+    u.save()
+    u_profile = UserProfile.objects.get_or_create(user=u)[0]
+
+    userObjects.append(u_profile)
+    
+    u_profile.save()
+    return u_profile
 
 #Execution begins here
 if __name__ == '__main__':

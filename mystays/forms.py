@@ -14,7 +14,7 @@ class StayForm(forms.ModelForm):
 
     class Meta:
         model = Stay
-        fields = ('name',)
+        fields = ('name', 'price', 'description', 'address', 'contacts')
 
 
 #form to leave a review for a stay
@@ -30,7 +30,7 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        exclude = ('stay',)
+        exclude = ('stay', 'reviewedBy',)
 
 #form to fill in the username, email, and password of a new user
 class UserForm(forms.ModelForm):

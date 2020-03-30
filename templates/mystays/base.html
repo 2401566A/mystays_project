@@ -19,8 +19,14 @@
             <ul>
                 <li><a href="{% url 'mystays:home' %}">Home</a></li>
                 <li><a href="{% url 'mystays:about_us' %}">About Us</a></li>
-                <li><a href="{% url 'mystays:sign_up' %}">Sign Up</a></li>
-                <li><a href="{% url 'mystays:user_login' %}">Login</a></li>
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'mystays:my_account' user.username %}">MyAccount</a></li>
+                    <li><a href="{% url 'mystays:user_logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'mystays:sign_up' %}">Sign Up</a></li>
+                    <li><a href="{% url 'mystays:user_login' %}">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </body>

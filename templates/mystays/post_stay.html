@@ -7,7 +7,7 @@
 {% block body_block %}
     <h1>Post a New Stay</h1>
     <div>
-        <form id="stay_form" method="post" action="{% url 'mystays:post_stay' %}">
+        <form id="stay_form" method="post" action="{% url 'mystays:post_stay' user.username %}">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
             {{ hidden }}
