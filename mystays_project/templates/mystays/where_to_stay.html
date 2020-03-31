@@ -1,0 +1,22 @@
+{% extends 'mystays/base.html' %}
+
+{% block title_block %}
+    Where to Stay
+{% endblock %}
+
+{% block body_block %}
+    <h1>Stays</h1>
+
+    <div>
+        {% if stays %}
+            {% for stay in stays %}
+                <h3>{{ stay.name }}</h3>
+                Rating: {{ stay.propertyRating }}<br />
+                {{ stay.description }}<br />
+                <a href="{% url 'mystays:show_stay' stay.slug %}">View</a><br />
+            {% endfor %}
+        {% else %}
+            There is nowhere to stay.
+        {% endif %}
+    </div>
+{% endblock %}

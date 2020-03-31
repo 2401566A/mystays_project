@@ -1,0 +1,47 @@
+{% extends 'mystays/base.html' %}
+
+{% block title_block %}
+    ChosenStay-{{ stay.name }}
+{% endblock %}
+
+{% block body_block %}
+    {% if stay %}
+    <div>
+        <h1>{{ stay.name }}</h1>
+
+        <div>
+            <strong>{{ stay.description }}</strong><br /><br />
+        </div>
+
+        <div>
+            Rating: {{ stay.propertyRating }}/10<br />
+            Price: starts at {{ stay.price }}/night<br />
+            Contact Information: {{ stay.contacts }}<br />
+        </div>
+
+        <h2>Reviews</h2>
+
+        <div>
+            {% if reviews %}
+            {% for review in reviews %}
+            <strong>{{ review.title }}</strong> Overall: {{ review.impression }}/10<br />
+            {{ review.comment }}<br />
+            Location: {{ review.locationRating }}/10<br />
+            Cleanliness: {{ review.cleanliness }}/10<br />
+            Accuracy of Description: {{ review.descripAccuracy }}/10<br />
+            Cost Value: {{ review.costRating }}/10<br />
+            <br />
+            {% endfor %}
+            {% else %}
+            <strong>This stay currently has no reviews.</strong>
+            {% endif %}
+        </div>
+    </div>
+    {% else %}
+    The specified stay does not exist.
+    {% endif %}
+    
+    {% if user.is_authenticated %}
+        <a href="{% url 'mystays:rate_and_review' stay.slug user.username %}">Leave Review</a><br />
+    {% endif %}
+{% endblock %}

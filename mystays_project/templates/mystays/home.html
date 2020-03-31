@@ -1,0 +1,26 @@
+{% extends 'mystays/base.html' %}
+
+{% block title_block %}
+    Home
+{% endblock %}
+
+{% block body_block %}
+    <h1>MyStays</h1>
+    <div>
+        <a href="{% url 'mystays:about_us' %}">About Us</a><br />
+        <a href="{% url 'mystays:where_to_stay' %}">Where To Stay</a><br />
+    </div>
+
+    <div>
+        <h2>Check out our highest rated stays...</h2>
+        {% if best_stays %}
+        <ul>
+            {% for stay in best_stays %}
+            <li><a href="{% url 'mystays:show_stay' stay.slug %}">{{ stay.name }}</a>: {{ stay.propertyRating }}/10</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <strong>There is nowhere to stay.</strong>
+        {% endif %}
+    </div>
+{% endblock %}

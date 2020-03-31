@@ -1,0 +1,43 @@
+{% extends 'mystays/base.html' %}
+
+{% block title_block %}
+    Posted Stays
+{% endblock %}
+
+{% block body_block %}
+    {% if selected_user == user %}
+    <h1>My Account</h1>
+        {% else %}
+    <h1>{{ selected_user.username }}'s Account</h1>
+        {% endif %}
+
+    <div>
+        <img src="{{ MEDIA_URL }}{{user_profile.picture}}"
+             width="300"
+             height="300"
+             alt="{{ selected_user.username }}'s profile picture" />
+        <br />
+        Username: {{ selected_user.username }}<br />
+        Email: {{ selected_user.email }}<br />
+
+        {% if selected_user == user %}
+        <a href="{% url 'mystays:edit_account' user.username %}">Edit Details</a><br />
+        <a href="{% url 'mystays:post_stay' user.username %}">Post a New Stay</a><br />
+        <a href="{% url 'mystays:my_reviews' user.username %}">My Reviews</a><br />
+        {% endif %}
+    </div>
+
+    <div>
+        <h2>Posted Stays</h2>
+        {% if posted_stays %}
+            {% for stay in posted_stays %}
+            <h3>{{ stay.name }}</h3>
+            Rating: {{ stay.propertyRating }}<br />
+            {{ stay.description }}<br />
+            <a href="{% url 'mystays:show_stay' stay.slug %}">View</a><br />
+            {% endfor %}
+        {% else %}
+            <strong>This user has not posted any stays.</strong>
+        {% endif %}
+    </div>
+{% endblock %}

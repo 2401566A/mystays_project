@@ -1,0 +1,30 @@
+{% extends 'mystays/base.html' %}
+
+{% block title_block %}
+    Rate and Review
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{ stay.name }}</h1>
+
+    <div>
+        {{ stay.description }}<br />
+    </div>
+
+    <div>
+        <h2>Leave Review</h2>
+        <form id="review_form" method="post" action="{% url 'mystays:rate_and_review' stay.slug user.username %}">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}
+            {{ field }}
+            <br />
+            {% endfor %}
+            <input type="submit" name="submit" value="Rate and Review" />
+        </form>
+    </div>
+{% endblock %}
