@@ -18,7 +18,8 @@ class Stay(models.Model):
     price = models.IntegerField(default=0)
     propertyRating = models.DecimalField(max_digits=3, decimal_places=1, default=0.0)
     description = models.CharField(max_length=255)
-    address = models.CharField(max_length=100, default='')
+    latitude = models.DecimalField(max_digits=15, decimal_places=10, default=0)
+    longitude = models.DecimalField(max_digits=15, decimal_places=10, default=0)
     contacts = models.CharField(max_length=100)
 
     postedBy = models.ForeignKey(UserProfile, on_delete=models.CASCADE)

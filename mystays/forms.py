@@ -7,14 +7,15 @@ class StayForm(forms.ModelForm):
     price = forms.IntegerField(help_text="Starting price of a night in the stay:")
     propertyRating = forms.IntegerField(widget=forms.HiddenInput(), required=False)
     description = forms.CharField(max_length=255, help_text="Brief description:")
-    address = forms.CharField(max_length=100, help_text="Address:")
+    latitude = forms.DecimalField(help_text="Latitude:")
+    longitude = forms.DecimalField(help_text="longitude:")
     contacts = forms.CharField(max_length=100, help_text="Contact information:")
     
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Stay
-        fields = ('name', 'price', 'description', 'address', 'contacts')
+        fields = ('name', 'price', 'description', 'latitude', 'longitude', 'contacts')
 
 
 #form to leave a review for a stay

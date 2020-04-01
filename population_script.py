@@ -54,31 +54,32 @@ def populate():
          'comment': 'I had a really nice stay here for about three days. I loved the room decor and the concierge Gary is so nice and helpful.'} ]        
         
     
+    
     stays = {'Sanctum Resort': {'reviews': sanctum_resort_reviews, 'price': 128,
                                 'description': 'A 4-star hotel within walking distance of Glasgow Central. Breakfast and free WiFi included. Nationally ranked steakhouse located on the ground floor.',
-                                'contacts': '+44 7912 123456, sanctumresort@gmail.com'},
+                                'latitude': '55.863815', 'longitude': '-4.274903', 'contacts': '+44 7912 123456, sanctumresort@gmail.com'},
             'Sunrise Hostel': {'reviews': sunrise_hostel_reviews, 'price': 24,
                                'description': 'Low cost hostel in the center of Edinburgh. Ideal for travel on a budget. Clean rooms and friendly staff.',
-                               'contacts': '+44 7282 126270, sunrisehostel@gmail.com'},
+                               'latitude': '55.949702', 'longitude': '-3.191505', 'contacts': '+44 7282 126270, sunrisehostel@gmail.com'},
             'Riverside Inn': {'reviews': riverside_inn_reviews, 'price': 65,
                               'description': 'Picturesque inn with a riverside view and large garden. Rental cars available to drive to the nearest cities of Glasgow and Stirling.',
-                              'contacts': '+44 7958 156456, riversideinn@gmail.com'},
+                              'latitude': '56.003672', 'longitude': '3.895077', 'contacts': '+44 7958 156456, riversideinn@gmail.com'},
             'Northern Country Inn': {'reviews': northern_country_inn_reviews, 'price': 59,
                               'description': 'Beautiful inn surrounded by forest and country views. Features classically decorated rooms with a fireplace and a room service menu.',
-                              'contacts': '+44 7900 756816, northerncountryinn@gmail.com'},
+                              'latitude': '57.214580', 'longitude': '-4.615784', 'contacts': '+44 7900 756816, northerncountryinn@gmail.com'},
             'Purple Rose Hotel': {'reviews': purple_rose_hotel_reviews, 'price': 155,
                                      'description': 'Luxurious and hospitable hotel with gourmet room service and restaurant. Spacious and tastefully decorated rooms with daily cleaning service and friendly staff. The whole family will love their stay here!',
-                                     'contacts': '+44 7903 752345, purplerosehotel@gmail.com'},
+                                     'latitude': '56.342058', 'longitude': '-2.800748', 'contacts': '+44 7903 752345, purplerosehotel@gmail.com'},
             'Horizons Hotel': {'reviews': horizons_hotel_reviews, 'price': 74,
                                     'description': 'Reasonably priced hotel with beautifully decorated rooms and attentive staff. Rated a top hotel in Glasgow for five years running. Come stay with us!',
-                                    'contacts': '+44 7933 272747, horizonshotel@gmail.com'} }
+                                    'latitude': '55.86', 'longitude': '-4.251771', 'contacts': '+44 7933 272747, horizonshotel@gmail.com'} }
 
     for user in users:
         u = add_user(user['username'], user['password'], user['email'])
         print(f'- {u}')
     
     for sta, stay_data in stays.items():
-        s = add_stay(sta, stay_data['price'], stay_data['description'], stay_data['contacts'], stay_data['reviews'])
+        s = add_stay(sta, stay_data['price'], stay_data['description'], stay_data['latitude'], stay_data['longitude'], stay_data['contacts'], stay_data['reviews'])
         for r in stay_data['reviews']:
             add_review(s, r['title'], r['impression'], r['locationRating'], r['cleanliness'], r['descripAccuracy'], r['costRating'], r['comment'])
 
@@ -101,12 +102,14 @@ def add_review(stay, title, impression, locationRating, cleanliness, descripAccu
     return r
 
 
-def add_stay(name, price, description, contacts, reviews):
+def add_stay(name, price, description, latitude, longitude, contacts, reviews):
     s = Stay.objects.get_or_create(name=name, postedBy=userObjects[1])[0]
     s.price=price
     s.description=description
+    s.latitude=latitude
+    s.longitude=longitude
     s.contacts=contacts
-
+    
     s.save()
     return s
 
