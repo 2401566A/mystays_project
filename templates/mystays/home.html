@@ -6,13 +6,25 @@
 
 {% block body_block %}
     <h1>MyStays</h1>
+
+    <!--Code for the Search bar-->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <form class="example" action="action_page.php">
+        <input type="text" placeholder="Where would you like to stay" name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    <!--End of code for the Search bar-->
+
     <div>
-        <a href="{% url 'mystays:about_us' %}">About Us</a><br />
-        <a href="{% url 'mystays:where_to_stay' %}">Where To Stay</a><br />
+        <a href="{% url 'mystays:about_us' %}">About Us</a>
+        <a href="{% url 'mystays:where_to_stay' %}">View All Stays</a><br />
     </div>
 
     <div>
-        <h2>Check out our highest rated stays...</h2>
+        <h2>Popular Stays</h2>
         {% if best_stays %}
         <ul>
             {% for stay in best_stays %}
