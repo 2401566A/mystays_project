@@ -87,11 +87,13 @@ class PostStayView(View):
         except TypeError:
             return redirect(reverse('mystays:home'))
 
-        form = StayForm(request.POST)
+        form = StayForm(request.POST, request.FILES)
         
         if form.is_valid():
             stay = form.save(commit=False)
             stay.postedBy = user_profile
+  #          stay.picture = request.FILES['picture']
+            
             stay.save()
             
             return redirect('mystays:posted_stays', user.username)

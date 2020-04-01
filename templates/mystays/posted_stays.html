@@ -32,6 +32,7 @@
         {% if posted_stays %}
             {% for stay in posted_stays %}
             <h3>{{ stay.name }}</h3>
+            <img src="{{ MEDIA_URL }}{{stay.picture}}" width=300 alt="picture of {{ stay }}" /><br />
             Rating: {{ stay.propertyRating }}<br />
             {{ stay.description }}<br />
             <a href="{% url 'mystays:show_stay' stay.slug %}">View</a><br />

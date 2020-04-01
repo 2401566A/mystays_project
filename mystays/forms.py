@@ -4,6 +4,7 @@ from mystays.models import Stay, Review, UserProfile, User
 #form to upload a stay to the database
 class StayForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text="Name of the stay:")
+    picture = forms.ImageField(help_text="Picture of the stay:")
     price = forms.IntegerField(help_text="Starting price of a night in the stay:")
     propertyRating = forms.IntegerField(widget=forms.HiddenInput(), required=False)
     description = forms.CharField(max_length=255, help_text="Brief description:")
@@ -17,7 +18,7 @@ class StayForm(forms.ModelForm):
 
     class Meta:
         model = Stay
-        fields = ('name', 'price', 'description', 'latitude', 'longitude', 'keyword', 'contacts')
+        fields = ('name', 'picture', 'price', 'description', 'latitude', 'longitude', 'keyword', 'contacts')
 
 
 #form to leave a review for a stay

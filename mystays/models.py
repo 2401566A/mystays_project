@@ -14,7 +14,7 @@ class UserProfile(models.Model):
 class Stay(models.Model):
     name = models.CharField(max_length=128, unique=True)
 #    stayID = models.CharField(max_length=30, unique=True)
-#    picture = models.ImageField(upload_to=None)
+    picture = models.ImageField(upload_to='stay_images/')
     price = models.IntegerField(default=0)
     propertyRating = models.DecimalField(max_digits=3, decimal_places=1, default=0.0)
     description = models.CharField(max_length=255)
