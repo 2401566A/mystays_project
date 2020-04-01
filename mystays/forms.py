@@ -10,12 +10,14 @@ class StayForm(forms.ModelForm):
     latitude = forms.DecimalField(help_text="Latitude:")
     longitude = forms.DecimalField(help_text="longitude:")
     contacts = forms.CharField(max_length=100, help_text="Contact information:")
-    
+
+    keyword = forms.CharField(max_length=50, help_text="Closest city or town to the stay:")    
+
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Stay
-        fields = ('name', 'price', 'description', 'latitude', 'longitude', 'contacts')
+        fields = ('name', 'price', 'description', 'latitude', 'longitude', 'keyword', 'contacts')
 
 
 #form to leave a review for a stay

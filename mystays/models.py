@@ -24,6 +24,8 @@ class Stay(models.Model):
 
     postedBy = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
+    keyword = models.CharField(max_length=50)
+
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):
