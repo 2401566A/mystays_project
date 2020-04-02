@@ -392,11 +392,16 @@ def calcPropertyRating(stay, reviews):
         stay.propertyRating = 0
     
     stay.save()
+    
+##### Search
 
-
-
-
-
-
-
-
+def search(request, pk):
+    context_dict = {}
+    s_keyword = get_object_or_404(keyword, pk=pk)
+    
+    for s in Stay.objects.all():
+        if s.keyword.equals(s_keyword):
+            context_dict['desired_stays'] = s
+    
+    response = render(request, 'mystays/search.html', context_dict)
+    

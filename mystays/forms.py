@@ -50,3 +50,6 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('picture',)
+
+class Search(forms.Form):
+    keyword = forms.CharField(help_text="Where would you like to stay?")
