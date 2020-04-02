@@ -36,6 +36,7 @@
             Rating: {{ stay.propertyRating }}<br />
             {{ stay.description }}<br />
             <a href="{% url 'mystays:show_stay' stay.slug %}">View</a><br />
+            <a href="{% url 'mystays:edit_stay' user.username stay.slug %}">Edit</a><br />
             {% endfor %}
         {% else %}
             <strong>This user has not posted any stays.</strong>

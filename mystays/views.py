@@ -92,7 +92,6 @@ class PostStayView(View):
         if form.is_valid():
             stay = form.save(commit=False)
             stay.postedBy = user_profile
-  #          stay.picture = request.FILES['picture']
             
             stay.save()
             
@@ -242,6 +241,7 @@ class MyAccountView(View):
         return response
 
 
+#view that allows users to change their account information
 class EditAccountView(View):
     def get_user_details(self, username):
         try:
@@ -305,6 +305,56 @@ class PostedStaysView(View):
         return response
 
 
+#view that allows the user to edit the details of the stays they have posted
+class EditStayView(View):
+    @method_decorator(login_required)
+    def get(self, request, username, stay_name_slug):
+        context_dict = {}
+        
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return None
+
+        user_profile = UserProfile.objects.get_or_create(user=user)[0]
+        
+        form = StayForm()
+        stay = Stay.objects.get(slug=stay_name_slug)
+
+        context_dict['form'] = form
+        context_dict['stay'] = stay
+        context_dict['user'] = user
+        context_dict['user_profile'] = user_profile
+
+        response = render(request, 'mystays/edit_stay.html', context_dict)
+        return response
+
+    @method_decorator(login_required)
+    def post(self, request, username, stay_name_slug):
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return None
+
+        user_profile = UserProfile.objects.get_or_create(user=user)[0]
+
+        stay = Stay.objects.get(slug=stay_name_slug)
+        form = StayForm(request.POST, request.FILES, instance=stay)
+        
+        if form.is_valid():
+            form.save(commit=True)
+
+            #once the stay data has been changed, redirect back to their posted stays - the changes just made should be visible
+            return redirect('mystays:posted_stays', user.username)
+        else:
+            print(form.errors)
+
+        context_dict = {'user_profile': user_profile, 'selected_user': user, 'form': form}
+
+        return render(request, 'mystays/edit_stay.html', context_dict)
+
+
+#view that allows the user to see the reviews they've posted
 class MyReviewsView(View):
     def get(self, request, username):
         context_dict = {}
