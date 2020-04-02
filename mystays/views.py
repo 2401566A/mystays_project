@@ -388,8 +388,6 @@ def calcPropertyRating(stay, reviews):
     if count != 0:
         average = total/count
         stay.propertyRating = average
-    else:
-        stay.propertyRating = 0
     
     stay.save()
     
