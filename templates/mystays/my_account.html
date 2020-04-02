@@ -11,24 +11,26 @@
     {% else %}
     <h1>{{ selected_user.username }}'s Account</h1>
     {% endif %}
+	<div class="inline">
+		<div class="inline">
+			<img src="{{ MEDIA_URL }}{{user_profile.picture}}"
+				width="300"
+				height="250"
+				alt="{{ selected_user.username }}'s profile picture" />
+		</div>
+		<div class = "inline">
+			Username: {{ selected_user.username }}<br />
+			Email: {{ selected_user.email }}<br />
+
+			{% if selected_user == user %}
+				<a href="{% url 'mystays:edit_account' user.username %}">Edit Details</a>
+			{% endif %}
+		</div>
+	</div>
 
     <div>
-        <img src="{{ MEDIA_URL }}{{user_profile.picture}}"
-             width="300"
-             height="300"
-             alt="{{ selected_user.username }}'s profile picture" />
-        <br />
-        Username: {{ selected_user.username }}<br />
-        Email: {{ selected_user.email }}<br />
-
-        {% if selected_user == user %}
-            <a href="{% url 'mystays:edit_account' user.username %}">Edit Details</a>
-        {% endif %}
-    </div>
-
-    <div>
-        <a href="{% url 'mystays:post_stay' user.username %}">Post a New Stay</a><br />
-        <a href="{% url 'mystays:posted_stays' user.username %}">My Stays</a><br />
+        <a href="{% url 'mystays:post_stay' user.username %}">Post a New Stay</a>
+        <a href="{% url 'mystays:posted_stays' user.username %}">My Stays</a>
         <a href="{% url 'mystays:my_reviews' user.username %}">My Reviews</a><br />
     </div>
 {% endblock %}

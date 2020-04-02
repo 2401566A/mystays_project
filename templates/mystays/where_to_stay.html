@@ -6,16 +6,26 @@
 
 {% block body_block %}
     <h1>Stays</h1>
-
+	<hr />
     <div>
         {% if stays %}
             {% for stay in stays %}
                 <h3>{{ stay.name }}</h3>
-                <img src="{{ MEDIA_URL }}{{stay.picture}}" width=400 alt="picture of {{ stay }}" /><br />
-                Rating: {{ stay.propertyRating }}<br />
-                {{ stay.description }}<br />
-                <a href="{% url 'mystays:show_stay' stay.slug %}">View</a><br />
-            {% endfor %}
+				<div class="inline">
+					<div class="inline">
+						<img src="{{ MEDIA_URL }}{{stay.picture}}" width=400 alt="picture of {{ stay }}" /><br />
+					</div>
+					<div class="inline">
+					Rating: {{ stay.propertyRating }}<br />
+					<a href="{% url 'mystays:show_stay' stay.slug %}">View</a><br />
+					</div>
+				</div>
+                <div>
+					{{ stay.description }}<br />
+				</div>
+				<br />
+				<hr />
+			{% endfor %}
         {% else %}
             There is nowhere to stay.
         {% endif %}

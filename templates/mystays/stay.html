@@ -8,19 +8,25 @@
     {% if stay %}
     <div>
         <h1>{{ stay.name }}</h1>
+		<div class="inline">
+			<div class = "inline">
+				<img src="{{ MEDIA_URL }}{{stay.picture}}" width=450 alt="picture of {{ stay }}" /><br />
+			</div>
 
-        <div>
-            <img src="{{ MEDIA_URL }}{{stay.picture}}" width=450 alt="picture of {{ stay }}" /><br />
-            <strong>{{ stay.description }}</strong><br /><br />
-        </div>
-
-        <div>
-            Rating: {{ stay.propertyRating }}/10<br />
-            Price: starts at {{ stay.price }}/night<br />
-            Contact Information: {{ stay.contacts }}<br />
-        </div>
+			<div class = "inline">
+				<h3>Information</h3>
+				<hr />
+				<strong>Rating: {{ stay.propertyRating }}/10</strong><br />
+				Price: starts at {{ stay.price }}/night<br />
+				Contact Information: {{ stay.contacts }}<br />
+			</div>
+		</div>
 		
-		<div id="map"></div>
+		<div>
+			{{ stay.description }}
+		</div>
+		
+		<div class="inline" id="map"></div>
 		<script>
 		
 // Initialize and add the map
