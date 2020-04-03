@@ -55,22 +55,22 @@ def populate():
         
     
     
-    stays = {'Sanctum Resort': {'reviews': sanctum_resort_reviews, 'price': 128, 'keyword': 'Glasgow', 'picture': 'stay_images/sanctum_resort.jpg',
+    stays = {'Sanctum Resort': {'reviews': sanctum_resort_reviews, 'price': 128.00, 'keyword': 'Glasgow', 'picture': 'stay_images/sanctum_resort.jpg',
                                 'description': 'A 4-star hotel within walking distance of Glasgow Central. Breakfast and free WiFi included. Nationally ranked steakhouse located on the ground floor.',
                                 'latitude': '55.863815', 'longitude': '-4.274903', 'contacts': '+44 7912 123456, sanctumresort@gmail.com'},
-            'Sunrise Hostel': {'reviews': sunrise_hostel_reviews, 'price': 24, 'keyword': 'Edinburgh', 'picture': 'stay_images/sunrise_hostel.jpg',
+            'Sunrise Hostel': {'reviews': sunrise_hostel_reviews, 'price': 24.99, 'keyword': 'Edinburgh', 'picture': 'stay_images/sunrise_hostel.jpg',
                                'description': 'Low cost hostel in the center of Edinburgh. Ideal for travel on a budget. Clean rooms and friendly staff.',
                                'latitude': '55.949702', 'longitude': '-3.191505', 'contacts': '+44 7282 126270, sunrisehostel@gmail.com'},
-            'Riverside Inn': {'reviews': riverside_inn_reviews, 'price': 65, 'keyword': 'Stirling', 'picture': 'stay_images/riverside_inn.jpg',
+            'Riverside Inn': {'reviews': riverside_inn_reviews, 'price': 65.99, 'keyword': 'Stirling', 'picture': 'stay_images/riverside_inn.jpg',
                               'description': 'Picturesque inn with a riverside view and large garden. Rental cars available to drive to the nearest city of Stirling.',
                               'latitude': '56.003672', 'longitude': '3.895077', 'contacts': '+44 7958 156456, riversideinn@gmail.com'},
-            'Northern Country Inn': {'reviews': northern_country_inn_reviews, 'price': 59, 'keyword': 'Inverness', 'picture': 'stay_images/northern_country_inn.jpg',
+            'Northern Country Inn': {'reviews': northern_country_inn_reviews, 'price': 59.99, 'keyword': 'Inverness', 'picture': 'stay_images/northern_country_inn.jpg',
                               'description': 'Beautiful inn surrounded by forest and country views. Features classically decorated rooms with a fireplace and a room service menu.',
                               'latitude': '57.214580', 'longitude': '-4.615784', 'contacts': '+44 7900 756816, northerncountryinn@gmail.com'},
-            'Purple Rose Hotel': {'reviews': purple_rose_hotel_reviews, 'price': 155, 'keyword': 'Saint Andrews', 'picture': 'stay_images/purple_rose_hotel.jpg',
+            'Purple Rose Hotel': {'reviews': purple_rose_hotel_reviews, 'price': 155.00, 'keyword': 'Saint Andrews', 'picture': 'stay_images/purple_rose_hotel.jpg',
                                      'description': 'Luxurious and hospitable hotel with gourmet room service and restaurant. Spacious and tastefully decorated rooms with daily cleaning service and friendly staff. The whole family will love their stay here!',
                                      'latitude': '56.342058', 'longitude': '-2.800748', 'contacts': '+44 7903 752345, purplerosehotel@gmail.com'},
-            'Horizons Hotel': {'reviews': horizons_hotel_reviews, 'price': 74, 'keyword': 'Glasgow', 'picture': 'stay_images/horizons_hotel.jpg',
+            'Horizons Hotel': {'reviews': horizons_hotel_reviews, 'price': 74.99, 'keyword': 'Glasgow', 'picture': 'stay_images/horizons_hotel.jpg',
                                     'description': 'Reasonably priced hotel with beautifully decorated rooms and attentive staff. Rated a top hotel in Glasgow for five years running. Come stay with us!',
                                     'latitude': '55.86', 'longitude': '-4.251771', 'contacts': '+44 7933 272747, horizonshotel@gmail.com'} }
 

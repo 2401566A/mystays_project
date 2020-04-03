@@ -5,7 +5,7 @@ from mystays.models import Stay, Review, UserProfile, User
 class StayForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text="Name of the stay:")
     picture = forms.ImageField(help_text="Picture of the stay:")
-    price = forms.IntegerField(help_text="Starting price of a night in the stay:")
+    price = forms.DecimalField(help_text="Starting price of a night in the stay:")
     propertyRating = forms.IntegerField(widget=forms.HiddenInput(), required=False)
     description = forms.CharField(max_length=255, help_text="Brief description:")
     latitude = forms.DecimalField(help_text="Latitude:")
