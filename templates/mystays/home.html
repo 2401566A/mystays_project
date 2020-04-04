@@ -1,42 +1,48 @@
 {% extends 'mystays/base.html' %}
+{% load static %}
 
 {% block title_block %}
-    Home
+Home
 {% endblock %}
 
 {% block body_block %}
-    <h1>MyStays</h1>
+<div id="home-background">
+    <div class="container-sm">
+        <h1>MyStays</h1>
 
-    <!--Code for the Search bar-->
-    <!--Search bar implementation inspired by https://stackoverflow.com/questions/45760035 and developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms-->
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--Code for the Search bar-->
+        <!--Search bar implementation inspired by https://stackoverflow.com/questions/45760035 and developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms-->
 
-    <form id="searchform" class="Search" method="get">
-        <input class="Search" id="test" type="text" placeholder="Where would you like to stay" name="search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!--End of code for the Search bar-->
+        <form id="searchform" class="Search" method="get">
+            <input class="Search" id="test" type="text" placeholder="Where would you like to stay" name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
 
-    <div>
-        <a href="{% url 'mystays:about_us' %}">About Us</a>
-        <a href="{% url 'mystays:where_to_stay' %}">View All Stays</a><br />
+        <!--End of code for the Search bar-->
+
+        <div>
+            <a href="{% url 'mystays:about_us' %}">About Us</a>
+            <a href="{% url 'mystays:where_to_stay' %}">View All Stays</a><br />
+        </div>
+
+        <div>
+            <h2>Popular Stays</h2>
+            {% if best_stays %}
+            <ul>
+                {% for stay in best_stays %}
+                <li>
+                    <img src="{{ MEDIA_URL }}{{stay.picture}}" height=125 alt="picture of {{ stay }}" /><br />
+                    <a href="{% url 'mystays:show_stay' stay.slug %}">{{ stay.name }}</a>: {{ stay.propertyRating }}/10
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <strong>There is nowhere to stay.</strong>
+            {% endif %}
+        </div>
     </div>
-
-    <div>
-        <h2>Popular Stays</h2>
-        {% if best_stays %}
-        <ul>
-            {% for stay in best_stays %}
-            <li>
-                <img src="{{ MEDIA_URL }}{{stay.picture}}" height=125 alt="picture of {{ stay }}" /><br />
-                <a href="{% url 'mystays:show_stay' stay.slug %}">{{ stay.name }}</a>: {{ stay.propertyRating }}/10
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <strong>There is nowhere to stay.</strong>
-        {% endif %}
-    </div>
+</div>
 {% endblock %}

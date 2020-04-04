@@ -1,47 +1,17 @@
-head{
-	color : black;
-	background-color: teal;
+html, body {
+	height: 100%;
 }
 
-body{
-	background-color: white;
-	color : black;
-	text-align: center
+.content {
+	min-height: 100%;
 }
 
-h3{
-	background-color: white;
-	color : black
+#home-background {
+	background-image: url('background.jpg');
+	background-size: cover;
+	height: 944px;
 }
 
-li{
-	color : red;
-	vertical-align: bottom;
-	text-align: left;
-	display: inline-block;	
+.footer {
+	position: relative;
 }
-
-.right {
-	background-color: teal;
-	text-align: right ! important;
-	color: black;
-	vertical-align: top;
-	padding-left: 1000px;
-	}
-
-.bar {
-	background-color: teal;
-}
-
-#map {
-	height: 200px;
-	width: 40%;
-	display: inline-block
-}
-
-.inline {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-
