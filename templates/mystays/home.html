@@ -8,37 +8,48 @@ Home
 {% block body_block %}
 <div id="home-background">
     <div class="container-sm">
-        <h1>MyStays</h1>
-
-        <!--Code for the Search bar-->
-        <!--Search bar implementation inspired by https://stackoverflow.com/questions/45760035 and developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms-->
-
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <form id="searchform" class="Search" method="get">
-            <input class="Search" id="test" type="text" placeholder="Where would you like to stay" name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
-
-        <!--End of code for the Search bar-->
-
-        <div>
-            <a href="{% url 'mystays:about_us' %}">About Us</a>
-            <a href="{% url 'mystays:where_to_stay' %}">View All Stays</a><br />
+        <div class="col-md-5 p-lg-5 mx-auto">
+            <h1 class="text-center display-3 font-weight-normal">MyStays</h1>
         </div>
 
-        <div>
-            <h2>Popular Stays</h2>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <form id="searchform" class="Search form-inline my-2 my-lg-0" method="get">
+                    <input id="test" class="Search search-input form-control mr-sm-2" type="text"
+                        placeholder="Where would you like to stay?" aria-label="Search" name="search">
+                    <button class="search-btn btn btn-outline-success my-2 my-sm-0" type="submit"><i
+                            class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <div class="row justify-content-md-center">
+                <a href="{% url 'mystays:about_us' %}" type="button" class="btn btn-primary btn-sm mt-3 mr-5">About
+                    Us</a>
+                <a href="{% url 'mystays:where_to_stay' %}" type="button" class="btn btn-primary btn-sm mt-3">View All
+                    Stays</a>
+            </div>
+        </div>
+
+        <div class="col-md-5 p-lg-5 mx-auto">
+            <h1 class="text-center display-5 font-weight-normal">Popular Stays</h1>
+            <hr id="popular-stays">
+        </div>
+
+        <div class="card-deck">
             {% if best_stays %}
-            <ul>
-                {% for stay in best_stays %}
-                <li>
-                    <img src="{{ MEDIA_URL }}{{stay.picture}}" height=125 alt="picture of {{ stay }}" /><br />
-                    <a href="{% url 'mystays:show_stay' stay.slug %}">{{ stay.name }}</a>: {{ stay.propertyRating }}/10
-                </li>
-                {% endfor %}
-            </ul>
+            {% for stay in best_stays %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{ MEDIA_URL }}{{stay.picture}}" height=125 alt="picture of {{ stay }}" />
+                <div class="card-body">
+                    <h5 class="card-title">{{ stay.name }}</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ stay.propertyRating }}/10</li>
+                    </ul>
+                    <ul class="list-group list-group-flush">
+                        <a href="{% url 'mystays:show_stay' stay.slug %}" class="btn btn-primary">View Stay</a>
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
             {% else %}
             <strong>There is nowhere to stay.</strong>
             {% endif %}

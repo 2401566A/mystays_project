@@ -15,3 +15,21 @@ html, body {
 .footer {
 	position: relative;
 }
+
+.search-input {
+	width: 400px !important;
+	height: 40px;
+}
+
+.search-btn {
+	height: 100%;
+	width: 40px;
+}
+
+#popular-stays {
+	border-top: 2px solid #ffffff;
+}
+
+.card-title {
+	min-height: 48px;
+}
