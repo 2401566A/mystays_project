@@ -53,5 +53,5 @@ label[for=login-username], label[for=login-password] {
 #map{
 	height: 200px;
 	width:40%;
-	display: inline-block
+	display: inline-block;
 }
