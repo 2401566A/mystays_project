@@ -2,18 +2,25 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Login
+Login
 {% endblock %}
 
 {% block body_block %}
-    <h1>Login</h1>
+<div class="container-sm">
+    <div class="page-header col-md-5 p-lg-5 mx-auto">
+        <h1 class="text-center display-4">Login</h1>
+    </div>
+    <hr>
 
     <form id="login_form" method="post" action="{% url 'mystays:user_login' %}">
         {% csrf_token %}
-        Username: <input type="text" name="username" value="" size="50" />
+        <label for="login-username">Username: </label>
+        <input id="login-username" type="text" name="username" value="" size="50" />
         <br />
-        Password: <input type="password" name="password" value="" size="50" />
+        <label for="login-password">Password: </label>
+        <input id="login-password" type="password" name="password" value="" size="50" />
         <br />
-        <input type="submit" value="submit" />
+        <input type="submit" value="submit" class="btn btn-primary" />
     </form>
+</div>
 {% endblock %}
