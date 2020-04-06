@@ -1,33 +1,40 @@
 {% extends 'mystays/base.html' %}
 
 {% block title_block %}
-    Where to Stay
+Where to Stay
 {% endblock %}
 
 {% block body_block %}
-    <h1>Stays</h1>
-	<hr />
-    <div>
-        {% if stays %}
-            {% for stay in stays %}
-                <h3>{{ stay.name }}</h3>
-				<div class="inline">
-					<div class="inline">
-						<img src="{{ MEDIA_URL }}{{stay.picture}}" width=400 alt="picture of {{ stay }}" /><br />
-					</div>
-					<div class="inline">
-					Rating: {{ stay.propertyRating }}<br />
+<div class="container-sm">
+	<div class="page-header col-md-5 p-lg-5 mx-auto">
+		<h1 class="text-center display-4">Stays</h1>
+	</div>
+	<hr>
+
+	<div>
+		{% if stays %}
+		{% for stay in stays %}
+		<h3>{{ stay.name }}</h3>
+	<div class="card mb-3">
+		<div class="row no-gutters">
+			<div class="col-md-4">
+				<img src="{{ MEDIA_URL }}{{stay.picture}}" class="card-img" alt="picture of {{ stay }}">
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+					<h5 class="card-title">{{ stay.name }}</h5>
+					<p class="card-text">{{ stay.description }}</p>
 					<a href="{% url 'mystays:show_stay' stay.slug %}">View</a><br />
-					</div>
+					<p class="card-text"><small class="text-muted">Rating: {{ stay.propertyRating }}/10</small></p>
 				</div>
-                <div>
-					{{ stay.description }}<br />
-				</div>
-				<br />
-				<hr />
-			{% endfor %}
-        {% else %}
-            There is nowhere to stay.
-        {% endif %}
-    </div>
+			</div>
+		</div>
+	</div>
+		<hr />
+		{% endfor %}
+		{% else %}
+		There is nowhere to stay.
+		{% endif %}
+	</div>
+</div>
 {% endblock %}
