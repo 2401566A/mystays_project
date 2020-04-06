@@ -2,24 +2,30 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Sign Up
+Sign Up
 {% endblock %}
 
 {% block body_block %}
-    <h1>Sign Up for MyStays</h1>
+<div class="container-sm">
+    <div class="page-header col-md-5 p-lg-5 mx-auto">
+        <h1 class="text-center display-4">Sign Up</h1>
+    </div>
+    <hr>
 
     {% if registered %}
-        <strong>Thank you for registering!</strong>
-        <a href="{% url 'mystays:home' %}">Return to Home</a><br />
+    <strong>Thank you for registering!</strong>
+    <a href="{% url 'mystays:home' %}">Return to Home</a><br />
     {% else %}
-        <form id="user_form" method="post" action="{% url 'mystays:sign_up' %}" enctype="multipart/form-data">
 
-            {% csrf_token %}
+    <form id="user_form" method="post" action="{% url 'mystays:sign_up' %}" enctype="multipart/form-data">
 
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
+        {% csrf_token %}
 
-            <input type="submit" name="submit" value="Sign Up" />
-        </form>
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+
+        <input type="submit" name="submit" value="Sign Up" class="btn btn-primary" />
+    </form>
     {% endif %}
+</div>
 {% endblock %}

@@ -34,8 +34,18 @@ html, body {
 	min-height: 48px;
 }
 
-#map {
-	height: 200px;
-	width: 40%;
-	display: inline-block
+label[for=id_username], label[for=id_email], label[for=id_password] {
+	width: 150px;
+}
+
+.page-header {
+	padding-bottom: 0px !important;
+}
+
+#login-username, #login-password {
+	width: 206.667px;
+}
+
+label[for=login-username], label[for=login-password] {
+	width: 150px;
 }
