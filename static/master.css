@@ -49,3 +49,9 @@ label[for=id_username], label[for=id_email], label[for=id_password] {
 label[for=login-username], label[for=login-password] {
 	width: 150px;
 }
+
+#map{
+	height: 200px;
+	width:40%;
+	disply: inline-block
+}
