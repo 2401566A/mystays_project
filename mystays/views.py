@@ -394,14 +394,26 @@ def calcPropertyRating(stay, reviews):
 ##### Search
 
 def search(request, keyword):
-    form = SearchForm()
-    context_dict = {'form':form}
+    ##form = SearchForm()
+    context_dict = {}
     ##s_keyword = get(keyword)
     s_keyword = keyword.lower()##s_keyword.lower()
     
-    for s in Stay.objects.all():
-        if s.keyword.lower()==keyword:
-            context_dict['desired_stays'] = s
+    desired_stays = Stay.objects.filter(keyword=s_keyword)
+    for s in desired_stays:
+        reviews = Review.objects.filter(stay=s)
+        calcPropertyRating(s, reviews)
+        
+    context_dict['desired_stays'] = desired_stays   
+    
+    #for s in stays():
+    #    if s.keyword.lower()==keyword:
+            ##context_dict['desired_stays'] = s
+    #        desired_stays.append(s)
+    #        reviews = Review.objects.filter(stay=s)
+    #        calcPropertyRating(s, reviews)
+            
+    #context_dict = {'desired_stays' : desired_stays}
     
     response = render(request, 'mystays/search.html', context_dict)
     return response
