@@ -60,3 +60,11 @@ label[for=login-username], label[for=login-password] {
 	height: 350px;
 	width: 350px;
 }
+
+.home-header {
+	color: #ffffff;
+}
+
+.nav-link {
+	color: black !important;
+}
