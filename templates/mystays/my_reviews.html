@@ -1,52 +1,30 @@
 {% extends 'mystays/base.html' %}
 
 {% block title_block %}
-    MyReviews
+MyReviews
 {% endblock %}
 
 {% block body_block %}
-    {% if selected_user == user %}
-        <h1>My Account</h1>
-    {% else %}
-        <h1>{{ selected_user.username }}'s Account</h1>
-    {% endif %}
-
-    <div class="inline">
-		<div class="inline">
-			<img src="{{ MEDIA_URL }}{{user_profile.picture}}"
-				width="300"
-				height="250"
-				alt="{{ selected_user.username }}'s profile picture" />
-		</div>
-		<div class = "inline">
-			Username: {{ selected_user.username }}<br />
-			Email: {{ selected_user.email }}<br />
-
-			{% if selected_user == user %}
-				<a href="{% url 'mystays:edit_account' user.username %}">Edit Details</a>
-			{% endif %}
-		</div>
-	</div>
-
-    <div>
-        <a href="{% url 'mystays:post_stay' user.username %}">Post a New Stay</a>
-        <a href="{% url 'mystays:posted_stays' user.username %}">My Stays</a>
+<div class="container">
+    <div class="page-header col-md-5 p-lg-5 mx-auto">
+        <h2 class="text-center">Ratings and Reviews</h2>
     </div>
+    <hr>
 
     <div>
-        <h2>Ratings and Reviews</h2>
         {% if my_reviews %}
-            {% for review in my_reviews %}
-                <strong>{{ review.title }}</strong> Overall: {{ review.impression }}/10<br />
-                {{ review.comment }}<br />
-                Location: {{ review.locationRating }}/10<br />
-                Cleanliness: {{ review.cleanliness }}/10<br />
-                Accuracy of Description: {{ review.descripAccuracy }}/10<br />
-                Cost Value: {{ review.costRating }}/10<br />
-                <br />
-            {% endfor %}
+        {% for review in my_reviews %}
+        <strong>{{ review.title }}</strong> Overall: {{ review.impression }}/10<br />
+        {{ review.comment }}<br />
+        Location: {{ review.locationRating }}/10<br />
+        Cleanliness: {{ review.cleanliness }}/10<br />
+        Accuracy of Description: {{ review.descripAccuracy }}/10<br />
+        Cost Value: {{ review.costRating }}/10<br />
+        <hr>
+        {% endfor %}
         {% else %}
-            <strong>This user has not rated or reviewed any stays.</strong>
+        <strong>This user has not rated or reviewed any stays.</strong>
         {% endif %}
     </div>
+</div>
 {% endblock %}
