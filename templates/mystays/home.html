@@ -14,7 +14,7 @@ Home
 
         <div class="container">
             <div class="row justify-content-md-center">
-                <form id="searchform" class="Search form-inline my-2 my-lg-0" method="get">
+                <form target="_blank" id="searchform" class="Search form-inline my-2 my-lg-0" method="get">
                     <input id="keyword" class="Search search-input form-control mr-sm-2" type="text"
                         placeholder="Where would you like to stay?" aria-label="Search" name="search">
                     <button class="search-btn btn btn-outline-success my-2 my-sm-0" type="submit"><i
@@ -22,11 +22,25 @@ Home
                 </form>
                 <script>
                     document.getElementById('searchform').onsubmit = function(){
-                        var curr_keyword = document.getElementById('keyword').textContent;
+                        var curr_keyword = document.getElementById('keyword');
+                        curr_keyword.focus();
+                        var keyword = curr_keyword.value;
+                        console.log(keyword);
 
-                        var location = document.getElementById('searching').href;
-                        window.location = location;
-                        return false;
+                        if (keyword == null || keyword==='' || keyword==='Where would you like to stay?') {
+                            window.location.assign(window.location.href);
+                            alert('Please input valid searchword');
+                        } else{
+                            var extStr = '';
+                            if(window.location.href.indexOf('mystays') > -1){
+                                extStr = 'Search/'
+                            } else {
+                                extStr = 'mystays/Search/'
+                            }
+                            var location = window.location.href + extStr + keyword;
+                            window.location.assign(location);
+                            return false;
+                        }
                     }
                 </script>
             </div>

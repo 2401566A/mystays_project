@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from mystays.models import Stay, Review
-from mystays.forms import StayForm, ReviewForm, UserForm, UserProfileForm, UserProfile
+from mystays.forms import StayForm, ReviewForm, UserForm, UserProfileForm, UserProfile, SearchForm
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
@@ -394,13 +394,14 @@ def calcPropertyRating(stay, reviews):
 ##### Search
 
 def search(request, keyword):
-    context_dict = {}
-    s_keyword = get_object_or_404(keyword)
-    s_keyword = s_keyword.lower()
+    form = SearchForm()
+    context_dict = {'form':form}
+    ##s_keyword = get(keyword)
+    s_keyword = keyword.lower()##s_keyword.lower()
     
     for s in Stay.objects.all():
-        if s.keyword.lower().equals(s_keyword):
+        if s.keyword.lower()==keyword:
             context_dict['desired_stays'] = s
     
     response = render(request, 'mystays/search.html', context_dict)
-    
+    return response
