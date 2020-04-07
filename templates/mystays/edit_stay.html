@@ -1,15 +1,19 @@
 {% extends 'mystays/base.html' %}
 
 {% block title_block %}
-    Edit Stay
+Edit Stay
 {% endblock %}
 
 {% block body_block %}
-    <h1>Edit Stay</h1>
+<div class="container-sm">
+    <div class="page-header col-md-5 p-lg-5 mx-auto">
+        <h2 class="text-center">Edit Stay</h2>
+    </div>
+    <hr>
 
     <div>
-        <h3>Update Stay Details</h3>
-        <form id="stay_form" method="post" action="{% url 'mystays:edit_stay' user.username stay.slug %}" enctype="multipart/form-data">
+        <form id="stay_form" method="post" action="{% url 'mystays:edit_stay' user.username stay.slug %}"
+            enctype="multipart/form-data">
             {% csrf_token %}
             {% for hidden in form.hidden_fields %}
             {{ hidden }}
@@ -21,7 +25,8 @@
             <br />
             {% endfor %}
 
-            <input type="submit" name="submit" value="Edit Stay" />
+            <input class="btn btn-primary" type="submit" name="submit" value="Edit Stay" />
         </form>
     </div>
+</div>
 {% endblock %}
