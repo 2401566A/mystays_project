@@ -397,12 +397,19 @@ def search(request, keyword):
     context_dict = {}
     s_keyword = keyword.lower().replace(' ', '')
  
-    desired_stays = Stay.objects.filter(keyword=s_keyword)
-    for s in desired_stays:
+    search_results = []
+
+    for stay in Stay.objects.all():
+        lowerKey = stay.keyword.lower()
+        if(lowerKey == s_keyword):
+            search_results.append(stay)
+    
+    for s in search_results:
         reviews = Review.objects.filter(stay=s)
         calcPropertyRating(s, reviews)
         
-    context_dict['desired_stays'] = desired_stays   
+    context_dict['desired_stays'] = search_results
+    context_dict['city'] = keyword
     
     response = render(request, 'mystays/search.html', context_dict)
     return response

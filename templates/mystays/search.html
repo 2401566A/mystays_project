@@ -12,7 +12,7 @@ Search Results
 	<hr>
 
 	<div>
-		{% if stays %}
+		{% if desired_stays %}
 		{% for stay in desired_stays %}
 		<h3 class="stayname">{{ stay.name }}</h3>
 	<div class="card mb-3">
@@ -33,7 +33,7 @@ Search Results
 		<hr />
 		{% endfor %}
 		{% else %}
-		There is nowhere to stay.
+		There is nowhere to stay in {{ city }}.
 		{% endif %}
 	</div>
 </div>
