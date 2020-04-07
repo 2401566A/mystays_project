@@ -1,52 +1,55 @@
 {% extends 'mystays/base.html' %}
 
 {% block title_block %}
-    ChosenStay-{{ stay.name }}
+ChosenStay-{{ stay.name }}
 {% endblock %}
 
 {% block body_block %}
-    {% if stay %}
-    <div>
-        <h1>{{ stay.name }}</h1>
-		<div class="inline">
-			<div class = "inline">
-				<img src="{{ MEDIA_URL }}{{stay.picture}}" width=450 alt="picture of {{ stay }}" /><br />
-			</div>
+{% if stay %}
+<div class="container-sm">
+    <div class="page-header col-md-5 p-lg-5 mx-auto">
+        <h2 class="text-center">{{ stay.name }}</h2>
+    </div>
+    <hr>
 
-			<div class = "inline">
-				<h3>Information</h3>
-				<hr />
-				<strong>Rating: {{ stay.propertyRating }}/10</strong><br />
-				Price: starts at £{{ stay.price }}/night<br />
-				Contact Information: {{ stay.contacts }}<br />
-			</div>
-		</div>
-		
-		<div>
-			{{ stay.description }}
-		</div>
-		
-		<div class="inline" id="map"></div>
-		<script>
-		
-// Initialize and add the map
-function initMap() {
-  // The location of Uluru
-  var userlat = {{stay.latitude}};
-  var userlng = {{stay.longitude}};
-  var location = {lat: userlat, lng: userlng};
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 11, center: location});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: location, map: map});
-}
-		</script>
-		<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfrP9Y16j1Ik1RxfFKXolARYpVJZcNo4w&callback=initMap">
-		</script>
-		
-        <h2>Reviews</h2>
+    <div class="text-center">
+        <img src="{{ MEDIA_URL }}{{stay.picture}}" width=450 alt="picture of {{ stay }}" /><br />
+    </div>
+
+    <div class="inline">
+        <h3 class="pt-3">Information</h3>
+        <hr>
+        <strong>Rating: {{ stay.propertyRating }}/10</strong><br />
+        Price: starts at £{{ stay.price }}/night<br />
+        Contact Information: {{ stay.contacts }}<br />
+    </div>
+
+    <div>
+        {{ stay.description }}
+    </div>
+
+    <div class="inline" id="map"></div>
+    <script>
+        // Initialize and add the map
+        function initMap() {
+        // The location of Uluru
+        var userlat = {{stay.latitude}};
+        var userlng = {{stay.longitude}};
+        var location = {lat: userlat, lng: userlng};
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 11, center: location});
+        // The marker, positioned at Uluru
+        var marker = new google.maps.Marker({position: location, map: map});
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfrP9Y16j1Ik1RxfFKXolARYpVJZcNo4w&callback=initMap">
+        </script>
+
+    <div class="inline">
+        <h3 class="pt-3">Reviews</h3>
+        <hr>
 
         <div>
             {% if reviews %}
@@ -58,17 +61,19 @@ function initMap() {
             Accuracy of Description: {{ review.descripAccuracy }}/10<br />
             Cost Value: {{ review.costRating }}/10<br />
             <br />
+            <hr>
             {% endfor %}
             {% else %}
             <strong>This stay currently has no reviews.</strong>
             {% endif %}
         </div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'mystays:rate_and_review' stay.slug user.username %}">Leave Review</a><br />
+        {% endif %}
     </div>
     {% else %}
     The specified stay does not exist.
     {% endif %}
-    
-    {% if user.is_authenticated %}
-        <a href="{% url 'mystays:rate_and_review' stay.slug user.username %}">Leave Review</a><br />
-    {% endif %}
-{% endblock %}
+
+
+    {% endblock %}
