@@ -1,19 +1,19 @@
 {% extends 'mystays/base.html' %}
 
 {% block title_block %}
-    Rate and Review
+Rate and Review
 {% endblock %}
 
 {% block body_block %}
-    <h1>{{ stay.name }}</h1>
-    <div class="inline">
-        <img src="{{ MEDIA_URL }}{{stay.picture}}" width=300 alt="picture of {{ stay }}" /><br />
+<div class="container">
+    <div class="page-header col-md-5 p-lg-5 mx-auto">
+        <h2 class="text-center">{{ stay.name }}</h2>
     </div>
-	<div class="inline">
-		<h3>Information</h3>
-		<hr />
-		{{ stay.description }}
-	</div>
+    <hr>
+
+    <div class="text-center">
+        <img src="{{ MEDIA_URL }}{{stay.picture}}" width=450 alt="picture of {{ stay }}" /><br />
+    </div>
 
     <div>
         <h2>Leave Review</h2>
@@ -31,4 +31,5 @@
             <input type="submit" name="submit" value="Rate and Review" />
         </form>
     </div>
+</div>
 {% endblock %}
