@@ -18,5 +18,5 @@ urlpatterns = [
     path('Login/MyAccount/<username>/PostStay/', views.PostStayView.as_view(), name='post_stay'),
     path('Login/MyAccount/<username>/MyReviews/', views.MyReviewsView.as_view(), name='my_reviews'),
     path('Logout/', views.user_logout, name='user_logout'),
-    path('?search=<uukeyword:pk/>', views.search, name='search'),
+    path('Search/<slug:keyword>/', views.search, name='search'),
 ]

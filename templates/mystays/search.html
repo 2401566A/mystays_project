@@ -7,8 +7,10 @@
 		<ul>
 			{% for stay in desired_stays %}
 			<li>
-				<img src="{{ MEDIA_URL }}{{stay.picture}}" height=125 alt="picture of {{ stay }}" /><br />
-                <a href="{% url 'mystays:show_stay' stay.slug %}">{{ stay.name }}</a>: {{ stay.propertyRating }}/10
+				<h5 class="card-title">{{ stay.name }}</h5>
+				<p class="card-text">{{ stay.description }}</p>
+					<a href="{% url 'mystays:show_stay' stay.slug %}">View</a><br />
+					<p class="card-text"><small class="text-muted">Rating: {{ stay.propertyRating }}/10</small></p>
 			</li>
 			{% endfor %}
 		</ul>
