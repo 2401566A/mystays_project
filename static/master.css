@@ -55,3 +55,8 @@ label[for=login-username], label[for=login-password] {
 	width:40%;
 	display: inline-block;
 }
+
+.profile-img {
+	height: 350px;
+	width: 350px;
+}
