@@ -16,26 +16,27 @@ Home
             <div class="row justify-content-md-center">
                 <form target="_blank" id="searchform" class="Search form-inline my-2 my-lg-0" method="get">
                     <input id="keyword" class="Search search-input form-control mr-sm-2" type="text"
-                        placeholder="Where would you like to stay?" aria-label="Search" name="search">
-                    <button class="search-btn btn btn-outline-success my-2 my-sm-0" type="submit"><i
-                            class="fa fa-search"></i></button>
+                           placeholder="In what city would you like to stay?" aria-label="Search" name="search">
+                    <button class="search-btn btn btn-outline-success my-2 my-sm-0" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </form>
                 <script>
-                    document.getElementById('searchform').onsubmit = function(){
+                    document.getElementById('searchform').onsubmit = function () {
                         var curr_keyword = document.getElementById('keyword');
                         curr_keyword.focus();
                         var keyword = curr_keyword.value;
                         console.log(keyword);
 
-                        if (keyword == null || keyword==='' || keyword==='Where would you like to stay?') {
+                        if (keyword == null || keyword === '' || keyword === 'In what city would you like to stay?') {
                             window.location.assign(window.location.href);
                             alert('Please input valid searchword');
-                        } else{
-                            if(keyword.includes('')){
+                        } else {
+                            if (keyword.includes('')) {
                                 keyword = keyword.replace(/\s+/g, '');
                             }
                             var extStr = '';
-                            if(window.location.href.indexOf('mystays') > -1){
+                            if (window.location.href.indexOf('mystays') > -1) {
                                 extStr = 'Search/'
                             } else {
                                 extStr = 'mystays/Search/'
@@ -47,11 +48,16 @@ Home
                     }
                 </script>
             </div>
+
             <div class="row justify-content-md-center">
-                <a href="{% url 'mystays:about_us' %}" type="button" class="btn btn-primary btn-sm mt-3 mr-5">About
-                    Us</a>
-                <a href="{% url 'mystays:where_to_stay' %}" type="button" class="btn btn-primary btn-sm mt-3">View All
-                    Stays</a>
+                <a href="{% url 'mystays:about_us' %}" type="button" class="btn btn-primary btn-sm mt-3 mr-5">
+                    About
+                    Us
+                </a>
+                <a href="{% url 'mystays:where_to_stay' %}" type="button" class="btn btn-primary btn-sm mt-3">
+                    View All
+                    Stays
+                </a>
             </div>
         </div>
 

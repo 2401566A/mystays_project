@@ -9,32 +9,40 @@ Where to Stay
 	<div class="page-header col-md-5 p-lg-5 mx-auto">
 		<h1 class="text-center display-4">Stays</h1>
 	</div>
+
 	<hr>
 
-	<div>
-		{% if stays %}
-		{% for stay in stays %}
-		<h3 class="stayname">{{ stay.name }}</h3>
-	<div class="card mb-3">
-		<div class="row no-gutters">
-			<div class="col-md-4">
-				<img src="{{ MEDIA_URL }}{{stay.picture}}" class="card-img" alt="picture of {{ stay }}">
-			</div>
-			<div class="col-md-8">
-				<div class="card-body">
-					<h5 class="card-title">{{ stay.name }}</h5>
-					<p class="card-text">{{ stay.description }}</p>
-					<a href="{% url 'mystays:show_stay' stay.slug %}">View</a><br />
-					<p class="card-text"><small class="text-muted">Rating: {{ stay.propertyRating }}/10</small></p>
-				</div>
-			</div>
-		</div>
-	</div>
-		<hr />
-		{% endfor %}
-		{% else %}
-		There is nowhere to stay.
-		{% endif %}
-	</div>
+    <div>
+        {% if stays %}
+
+        <a href="{% url 'mystays:sorted_by_rating' %}" type="button" id="sort_by_overall_rating">Sort Stays by Overall Rating</a><br />
+        <a href="{% url 'mystays:sorted_by_price' %}" type="button" id="sort_by_price_value">Sort Stays by Price Value</a><br />
+        <a href="{% url 'mystays:sorted_by_location' %}" type="button" id="sort_by_location_value">Sort Stays by Location Value</a>
+        <br />
+        <br />
+
+        {% for stay in stays %}
+        <h3 class="stayname">{{ stay.name }}</h3>
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="{{ MEDIA_URL }}{{stay.picture}}" class="card-img" alt="picture of {{ stay }}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ stay.name }}</h5>
+                        <p class="card-text">{{ stay.description }}</p>
+                        <a href="{% url 'mystays:show_stay' stay.slug %}">View</a><br />
+                        <p class="card-text"><small class="text-muted">Rating: {{ stay.propertyRating }}/10</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        {% endfor %}
+        {% else %}
+        There is nowhere to stay.
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

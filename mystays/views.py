@@ -390,6 +390,7 @@ def calcPropertyRating(stay, reviews):
         stay.propertyRating = average
     
     stay.save()
+
     
 ##### Search
 
@@ -413,3 +414,85 @@ def search(request, keyword):
     
     response = render(request, 'mystays/search.html', context_dict)
     return response
+
+
+##### Sorting
+
+#view to sort the stays by rating in the where_to_stay page
+class SortStaysByRatingView(View):
+    def get(self, request):
+        sorted_stays = Stay.objects.order_by('-propertyRating')
+
+        return render(request, 'mystays/where_to_stay.html', {'stays': sorted_stays})
+
+#view to sort the stays by price value in the where_to_stay page
+class SortStaysByPriceValueView(View):
+    def get_highest_price_value(self, stays):
+        highestRating = 0
+        highestStay = None
+
+        for s in stays:
+            priceRating = 0
+            count = 0
+            total = 0
+            for r in Review.objects.filter(stay=s):
+                count = count + 1
+                total = total + r.costRating
+            if count > 0:
+                priceRating = total/count
+
+            if priceRating >= highestRating:
+                highestRating = priceRating
+                highestStay = s
+
+        return highestStay
+        
+    def get(self, request):
+        sorted_stays = []
+        stays = list(Stay.objects.filter())
+        numStays = len(stays)
+        
+        for x in range(0, numStays):
+            highest = self.get_highest_price_value(stays)
+            
+            if highest:
+                sorted_stays.append(highest)
+                stays.remove(highest)   
+
+        return render(request, 'mystays/where_to_stay.html', {'stays': sorted_stays})
+
+#view to sort the stays by location value in the where_to_stay page
+class SortStaysByLocationValueView(View):
+    def get_highest_location_value(self, stays):
+        highestRating = 0
+        highestStay = None
+
+        for s in stays:
+            locationRating = 0
+            count = 0
+            total = 0
+            for r in Review.objects.filter(stay=s):
+                count = count + 1
+                total = total + r.locationRating
+            if count > 0:
+                locationRating = total/count
+
+            if locationRating >= highestRating:
+                highestRating = locationRating
+                highestStay = s
+
+        return highestStay
+        
+    def get(self, request):
+        sorted_stays = []
+        stays = list(Stay.objects.filter())
+        numStays = len(stays)
+        
+        for x in range(0, numStays):
+            highest = self.get_highest_location_value(stays)
+            
+            if highest:
+                sorted_stays.append(highest)
+                stays.remove(highest)   
+
+        return render(request, 'mystays/where_to_stay.html', {'stays': sorted_stays})
